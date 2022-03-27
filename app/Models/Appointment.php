@@ -19,4 +19,8 @@ class Appointment extends Model
     public function patient(){
         return $this->belongsTo('App\Models\Patient');
     }
+
+    public function medic(){
+        return $this->belongsTo('App\Models\Medic');
+    }
 }

@@ -18,16 +18,17 @@
 
 <div class="mb-4">
     {!! Form::label('gender', 'Sexo') !!}
-    @isset($patient)
+
+    @isset($medic)
         @php
-            if ($patient->gender == "Femenino") {
-                $v1 = "Femenino";
-                $v2 = "Masculino";
-            }
-            else{
-                $v2 = "Femenino";
-                $v1 = "Masculino";
-            }
+        if ($medic->gender == "Femenino") {
+            $v1 = "Femenino";
+            $v2 = "Masculino";
+        }
+        else{
+            $v2 = "Femenino";
+            $v1 = "Masculino";
+        }
         @endphp
     @else
         @php
@@ -36,10 +37,12 @@
         @endphp
     @endisset
 
+
     <select name="gender" id="gender" class="form-input block w-full mt-1">
         <option value="<?php echo $v1 ?>" > {{$v1}}</option>
         <option value="<?php echo $v2 ?>" > {{$v2}}</option>
     </select>
+
     @error('gender')
         <span class="text-red-600">{{$message}}</span>
     @enderror

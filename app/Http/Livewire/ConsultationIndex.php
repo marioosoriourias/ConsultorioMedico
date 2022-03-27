@@ -15,9 +15,10 @@ class ConsultationIndex extends Component
     {
         $consultations = Consultation::join('appointments', 'consultations.appointment_id', '=', 'appointments.id')
         ->join('patients', 'patients.id', '=', 'appointments.patient_id') 
-        ->select('consultations.id', 'consultations.date', 'patients.name', 'consultations.symptoms', 'consultations.diagnostic', 'consultations.treatment')
+        ->join('medics', 'medics.id', '=', 'appointments.medic_id') 
+        ->select('consultations.id', 'consultations.date', 'patients.name as patient', 'medics.name as medic', 'consultations.symptoms', 'consultations.diagnostic', 'consultations.treatment', 'consultations.observations')
         ->where('patients.name', 'LIKE', '%' . $this->search . '%')  
-        ->orwhere('consultations.date', 'LIKE', '%' . $this->search . '%')->paginate(8);
+        ->orwhere('medics.name', 'LIKE', '%' . $this->search . '%')->paginate(8);
 
 
         return view('livewire.consultation-index', compact('consultations'));

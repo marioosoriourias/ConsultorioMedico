@@ -3,12 +3,13 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Patient;
+use App\Models\Medic;
 use Livewire\WithPagination;
 
-class PatientIndex extends Component
-{
+use function Symfony\Component\Translation\t;
 
+class MedicIndex extends Component
+{
     use WithPagination;
     public $search;
     public $valor;
@@ -19,10 +20,11 @@ class PatientIndex extends Component
         $this->order = 'asc';
     }
 
+
     public function render()
     {
-        $patients = Patient::where('name', 'LIKE', '%' . $this->search . '%')->orderBy($this->valor, $this->order)->paginate(8);
-        return view('livewire.patient-index', compact('patients'));
+        $medics = Medic::where('name', 'LIKE', '%' . $this->search . '%')->orderBy($this->valor, $this->order)->paginate(8);
+        return view('livewire.medic-index', compact('medics'));
     }
 
     public function cambiarValor($valor){

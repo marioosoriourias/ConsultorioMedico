@@ -6,7 +6,9 @@ use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ConsultationsController;
 use App\Http\Controllers\cuadroController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Medic_InfoController;
 use App\Http\Controllers\MedicalHistoryController;
+use App\Http\Controllers\MedicController;
 use App\Http\Controllers\PacientController;
 use App\Http\Controllers\PatientController;
 use App\Http\Livewire\MedicalHistoryIndex;
@@ -30,7 +32,18 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
+
+
 Route::resource('patients', PatientController::class)->middleware('auth')->names('patients');
+
+Route::resource('medics', MedicController::class)->middleware('auth')->names('medics');
+
+
+//Citas que tiene asignada cada medico
+Route::get('medic_appointments/{medic}',  [Medic_InfoController::class, 'appointments'])->middleware('auth')->name('medic.appointments');
+
+//Consultas que ha realizado cada medico
+Route::get('medic_consultation/{medic}',  [Medic_InfoController::class, 'consultations'])->middleware('auth')->name('medic.consultations');
 
 //Route::resource('clinics', ClinicController::class)->names('clinics');
 Route::get('clinics/{patient}/crear',  [cuadroController::class, 'crear'])->middleware('auth')->name('clinics.crear');

@@ -24,6 +24,9 @@
                             Paciente
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                            Medico
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                             Fecha
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
@@ -35,6 +38,9 @@
                         
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                             <p>Tratamiento</p>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                            <p>Observaciones</p>
                         </th>
 
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
@@ -53,10 +59,14 @@
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-base font-medium text-gray-900">
-                                            {{$consultation->name}}
+                                            {{$consultation->patient}}
                                         </div>
                                     </div>
                                     </div>
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{$consultation->medic}}</div>                   
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -74,6 +84,10 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <div class="text-sm text-gray-900">{{$consultation->treatment}}</div>      
                                 </td> 
+
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <div class="text-sm text-gray-900">{{$consultation->observations}}</div>      
+                                </td>
 
                                 <td width="10px" class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <a href="{{route('consultations.edit', $consultation)}}" class="text-blue-500 hover:text-blue-700 " ><i class="fas fa-user-edit text-2xl"></i></a>

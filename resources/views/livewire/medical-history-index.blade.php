@@ -1,6 +1,6 @@
 <div>
     <div class="container">
-        <h1 class="text-3xl text-center pb-8 pt-2">Historial Medico</h1>
+        <h1 class="text-3xl text-center pb-8 pt-2">Historial Medico de <strong >{{$patient->name}}</strong> </h1>
          
         @if (session('info'))
             <div class="card">
@@ -10,12 +10,11 @@
             </div>
         @endif
         
-        <h2 class="text-2xl font-bold">{{$patient->name}}</h2>
+        
 
         <x-table-responsive>
             <div class="px-6 py-4 flex ">
                 <input wire:keydown="limpiar_page" wire:model="search" class="flex-1 form-group h-10 w-full border-gray-300  border-2">
-                <a href="{{route('patients.create')}}" class="btn btn-danger ml-2">Agregar nuevo paciente</a>
             </div>
 
             @if($consultations->count())    

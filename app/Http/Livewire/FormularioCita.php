@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Appointment;
 use App\Models\Patient;
+use App\Models\Medic;
 use Livewire\Component;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ use Illuminate\Support\Facades\DB;
 class FormularioCita extends Component
 {
 
-    public $name, $patient_id;
-    public $search;
+    public $name, $patient_id, $medic, $medic_id;
+    public $search = "", $search_medic;
+
     public $current_date, $current_hour;
 
     public $selected_date;
@@ -77,6 +79,16 @@ class FormularioCita extends Component
             })
         ->take(8)
         ->get();
+           
+    }    
+
+
+    //Mostraremos los medicos disponibles para una cita
+    public function getResultsMedicProperty()
+    {   
+        return Medic::where('name', 'LIKE', '%' . $this->search_medic. '%')
+        ->take(8)
+        ->get();
     }    
 
     //cuando le demos click al imput del paciente aqui guardarmos su nombre y su id
@@ -84,5 +96,11 @@ class FormularioCita extends Component
     {
         $this->search = $patient;
         $this->patient_id = $patient_id;
+    }
+
+    public function medic($medic, $medic_id)
+    {
+        $this->search_medic = $medic;
+        $this->medic_id = $medic_id;
     }
 }

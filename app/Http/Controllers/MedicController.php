@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patient;
+use App\Models\Medic;
 use Illuminate\Http\Request;
-use App\Http\Requests\StorePatient;
-use App\Http\Requests\UpdatePatient;
+use App\Http\Requests\StoreMedic;
+use App\Http\Requests\UpdateMedic;
 
-class PatientController extends Controller
+class MedicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return view('patients.index');
+        return view('medics.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        return view('patients.create');
+        return view('medics.create');
     }
 
     /**
@@ -35,10 +35,10 @@ class PatientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePatient $request)
-    {
-        $patient = Patient::create($request->all());
-        return redirect()->route('patients.edit', $patient)->with('info', 'El paciente se agrego correctamente');
+    public function store(StoreMedic $request)
+    { 
+        $medic = Medic::create($request->all());
+        return redirect()->route('medics.edit', $medic)->with('info', 'El medico se agrego correctamente');
     }
 
     /**
@@ -49,7 +49,8 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        //
+        $medic = Medic::find($id);
+        return view('medics.show', compact('medic'));
     }
 
     /**
@@ -58,9 +59,9 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit(Medic $medic)
     {
-        return view('patients.edit', compact('patient'));
+        return view('medics.edit', compact('medic'));
     }
 
     /**
@@ -70,10 +71,10 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePatient $request, Patient $patient)
-    {       
-        $patient->update($request->all());
-        return redirect()->route('patients.edit', $patient)->with('info', 'El paciente se edito correctamente');
+    public function update(UpdateMedic $request, Medic $medic)
+    {    
+        $medic->update($request->all());
+        return redirect()->route('medics.edit', $medic)->with('info', 'El medico se edito correctamente');
     }
 
     /**
@@ -82,9 +83,11 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function destroy(Medic $medic)
     {
-        $patient->delete();
-        return redirect()->route('patients.index')->with('info', 'El paciente se elimino con exito');;
+        $medic->delete();
+        return redirect()->route('patients.index')->with('info', 'El medico se elimino con exito');;
     }
+
+
 }

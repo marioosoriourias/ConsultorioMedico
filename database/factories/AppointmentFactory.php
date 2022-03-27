@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Appointment;
+use App\Models\Medic;
 use App\Models\Patient;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,6 +29,7 @@ class AppointmentFactory extends Factory
             'observations' => $this->faker->paragraph(),
             'state'=> '1',
             'patient_id' => Patient::all()->random()->id,
+            'medic_id' => Medic::all()->random()->id,
         ];
     }
 }

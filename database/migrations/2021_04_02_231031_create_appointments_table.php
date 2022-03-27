@@ -24,6 +24,9 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 
+            $table->unsignedBigInteger('medic_id');
+            $table->foreign('medic_id')->references('id')->on('medics')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

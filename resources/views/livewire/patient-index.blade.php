@@ -21,13 +21,16 @@
                     <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                            Nombre
+                            <p class="cursor-pointer" wire:click="cambiarValor('name')">Nombre</p> 
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                            Edad
+                            <p class="cursor-pointer" wire:click="cambiarValor('age')">Edad</p> 
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                            Email
+                            <p class="cursor-pointer" wire:click="cambiarValor('gender')">Genero</p> 
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                            <p class="cursor-pointer" wire:click="cambiarValor('email')">Email</p> 
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                             <p>Cuadro clinico</p>
@@ -66,6 +69,10 @@
 
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">{{$patient->age}}</div>                   
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{$patient->gender}}</div>                   
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

@@ -4,7 +4,10 @@ namespace App\Http\Livewire;
 
 use App\Models\Appointment;
 use App\Models\Patient;
+use App\Models\Medic;
+use Illuminate\Http\Request;
 use Livewire\Component;
+
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -14,8 +17,9 @@ class FormularioEditarCita extends Component
 
     public $appointment;
    
-    public $name, $patient_id;
-    public $search;
+    public $name, $patient_id, $medic, $medic_id;
+    public $search, $search_medic;
+
     public $current_date, $current_hour;
 
     public $selected_date;
@@ -24,7 +28,7 @@ class FormularioEditarCita extends Component
     public $appointments_hour;  
 
 
-    public function mount()
+    public function mount(Request $request)
     {
         for($i=9; $i < 19; $i++) {
             array_push($this->hours,($i < 10 ? "0":"") . $i .":00");
@@ -33,12 +37,12 @@ class FormularioEditarCita extends Component
 
         //fecha que nos llega de la cita seleccionada
         $this->selected_date = $this->appointment->date; 
+        $this->search_medic = $this->appointment->medic->name;
 
     }
 
     public function render()
     {
-        
         $hours_occupied = [];
         $avaliable_hours = [];
         $this->selected_date = Carbon::createFromFormat('Y-m-d', $this->selected_date)->format('Y-m-d');
@@ -66,6 +70,7 @@ class FormularioEditarCita extends Component
         }
 
         $appointment = $this->appointment;        
+
         return view('livewire.formulario-editar-cita', compact('avaliable_hours' ,'diference_hours', 'appointment'));
     }
 
@@ -82,10 +87,27 @@ class FormularioEditarCita extends Component
         ->get();
     }    
 
+
+    //Mostraremos los medicos disponibles para una cita
+    public function getResultsMedicProperty()
+    {   
+        return Medic::where('name', 'LIKE', '%' . $this->search_medic. '%')
+        ->take(8)
+        ->get();
+    }   
+
     //cuando le demos click al imput del paciente aqui guardarmos su nombre y su id
     public function patient($patient, $patient_id)
     {
         $this->search = $patient;
         $this->patient_id = $patient_id;
     }
+
+    public function medic($medic, $medic_id)
+    {
+        $this->search_medic = $medic;
+        $this->medic_id = $medic_id;
+    }
+
+
 }

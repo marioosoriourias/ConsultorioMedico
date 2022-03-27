@@ -12,7 +12,7 @@
                     </div>
                 @endif
     
-                {{substr($appointment->hour,0,5)}}
+              
                 <hr class="mt-2 mb-6">
 
                 {!! Form::model($appointment, ['route'=>['appointments.update', $appointment], 'method' => 'put']) !!}
@@ -46,6 +46,38 @@
                         <span class="text-red-600">{{$message}}</span>
                     @enderror
                 </div>
+                
+                
+                <div class="mb-4 relative mx-auto">
+                    {!! Form::label('medic', 'Medico') !!}
+        
+                    {!! Form::text('medic', $appointment->medic->name, ['class' => 'form-input block w-full mt-1 ', 'wire:model'=>"search_medic"]) !!}
+                    {!! Form::hidden('medic_id', $this->medic_id) !!}
+                   
+                    @if ($search_medic)
+                    <ul class="absolute z-50 left-0 w-full bg-white mt-1 rounded-lg overflow-hidden">
+                        @forelse ($this->ResultsMedic as $ResultMedic)
+                            <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-300">
+                                @if ($ResultMedic->name == $this->search_medic )
+                                    
+                                @else
+                                    <p class="cursor-pointer"  wire:click="medic('{{$ResultMedic->name}}', '{{$ResultMedic->id}}')">{{$ResultMedic->name}}</p>
+                                @endif
+                               
+                            </li>
+                        @empty
+                            <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-300">
+                                No hay ninguna coincidencia :(
+                            </li>
+                        @endforelse
+                    </ul>
+                    @endif
+
+                    @error('patient_id')
+                        <span class="text-red-600">{{$message}}</span>
+                    @enderror
+                </div>
+
 
                 <div class="mb-4">
                     {!! Form::label('date', 'Fecha') !!}

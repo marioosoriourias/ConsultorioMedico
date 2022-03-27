@@ -6,6 +6,11 @@
             'active' => request()->routeIS('home')
         ],
         [
+            'name' => 'Medicos',
+            'route' => route('medics.index'),
+            'active' => request()->routeIs('medics.*')
+        ],
+        [
             'name' => 'Pacientes',
             'route' => route('patients.index'),
             'active' => request()->routeIs('patients.*')
